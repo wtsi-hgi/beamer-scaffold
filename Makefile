@@ -1,14 +1,16 @@
 # MIT License
 # Copyright (c) 2015 Genome Research Limited
 
-PROJECT=myPresentation
+PROJECT?=myPresentation
 
-MAIN=$(PROJECT).tex
-SLIDES=$(wildcard slides/*.tex)
-OUTPUT=$(PROJECT).pdf
+MAIN=main.tex
+INDEX=slideIndex.tex
+SLIDES=find -s slides -type f -name "*.tex" -maxdepth 1
+
 BUILD=build
+OUTPUT=$(PROJECT).pdf
 
-PREP=./collate.sh
+PP=sed "s/.*/\\\input{&}/"
 CC=pdflatex
 CCFLAGS=-output-directory=$(BUILD) -jobname=$(PROJECT)
 
@@ -17,14 +19,21 @@ all: $(OUTPUT)
 	open $^
 
 # PDF output dependant on main and slide .tex sources
-# n.b., Main source needs preprocessing to include slide sources
-$(OUTPUT): $(MAIN) $(SLIDES)
-	mkdir $(BUILD); \
-	$(PREP) $(MAIN) | $(CC) $(CCFLAGS) && \
+# n.b., For multiple passes, replicate the $(CC) line appropriately
+$(OUTPUT): $(MAIN) $(INDEX) $(BUILD)
+	$(CC) $(CCFLAGS) $(MAIN) && \
 	mv $(BUILD)/$@ .
 
+# Preprocess slide sources to create index
+$(INDEX): $(shell $(SLIDES))
+	$(SLIDES) | $(PP) > $@
+
+$(BUILD):
+	mkdir $@
+
 clean:
-	rm -rf $(BUILD)/* && \
-	rm $(OUTPUT)
+	rm -rf $(BUILD)
+	rm -f $(INDEX)
+	rm -f $(OUTPUT)
 
 .PHONY: all clean
