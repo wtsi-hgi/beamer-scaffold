@@ -22,7 +22,7 @@ all: $(OUTPUT)
 # PDF output dependant on main and slide .tex sources
 # n.b., For multiple passes, replicate the $(CC) line appropriately
 $(OUTPUT): $(MAIN) $(INDEX) $(BUILD)
-	$(CC) $(CCFLAGS) $(MAIN) && \
+	$(CC) $(CCFLAGS) $(MAIN)
 	mv $(BUILD)/$@ .
 
 # Preprocess slide sources to create index
