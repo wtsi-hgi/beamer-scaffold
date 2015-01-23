@@ -23,6 +23,9 @@ For example:
 PROJECT=foobar make
 ```
 
+Either way, the wildcard `*.pdf` in `.gitignore` ought to be made
+specific to avoid erroneously ignoring any PDF imports you may have.
+
 # License
 
 [MIT License](LICENSE)
