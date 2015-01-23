@@ -1,7 +1,8 @@
 # MIT License
 # Copyright (c) 2015 Genome Research Limited
 
-PROJECT?=myPresentation
+# Project name is the basename of the present working directory
+PROJECT?=$(shell basename $$(pwd))
 
 MAIN=main.tex
 INDEX=slideIndex.tex
