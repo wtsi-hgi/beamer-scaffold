@@ -2,27 +2,29 @@
 # Copyright (c) 2015 Genome Research Limited
 
 # Project name is the basename of the present working directory
-PROJECT?=$(shell basename $$(pwd))
+TARGET?=$(shell basename $$(pwd))
 
 MAIN=main.tex
 INDEX=slideIndex.tex
 SLIDES=find -s slides -type f -name "*.tex" -maxdepth 1
 
 BUILD=build
-OUTPUT=$(PROJECT).pdf
+OUTPUT=$(TARGET).pdf
 
 PP=sed "s/.*/\\\input{&}/"
 CC=pdflatex
-CCFLAGS=-output-directory=$(BUILD) -jobname=$(PROJECT)
+CFLAGS=-output-directory=$(BUILD) -jobname=$(TARGET)
+RM=rm -rf
 
 # Build PDF output and open it
 all: $(OUTPUT)
 	open $^
 
 # PDF output dependant on main and slide .tex sources
-# n.b., For multiple passes, replicate the $(CC) line appropriately
+# n.b., For more than two passes, replicate the $(CC) line appropriately
 $(OUTPUT): $(MAIN) $(INDEX) $(BUILD)
-	$(CC) $(CCFLAGS) $(MAIN)
+	$(CC) $(CFLAGS) $(MAIN)
+	$(CC) $(CFLAGS) $(MAIN)
 	mv $(BUILD)/$@ .
 
 # Preprocess slide sources to create index
@@ -33,8 +35,8 @@ $(BUILD):
 	mkdir $@
 
 clean:
-	rm -rf $(BUILD)
-	rm -f $(INDEX)
-	rm -f $(OUTPUT)
+	$(RM) $(BUILD)
+	$(RM) $(INDEX)
+	$(RM) $(OUTPUT)
 
 .PHONY: all clean

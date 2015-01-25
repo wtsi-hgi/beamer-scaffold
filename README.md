@@ -16,15 +16,19 @@ based build system.
 
 Note that the PDF will have the same name as the basename of the present
 working directory, affixed with `.pdf`. If you want a different
-filename, set the `PROJECT` environment variable to the `make` command.
+filename, set the `TARGET` environment variable to the `make` command.
 For example:
 
 ```sh
-PROJECT=foobar make
+TARGET=foobar make
 ```
 
 Either way, the wildcard `*.pdf` in `.gitignore` ought to be made
 specific to avoid erroneously ignoring any PDF imports you may have.
+
+`make` will do two compilation passes, as that's usually enough for
+LaTeX, but these are basically hardcoded into the output rule. This
+could probably be done a lot better, but this is way is much easier!
 
 # License
 
