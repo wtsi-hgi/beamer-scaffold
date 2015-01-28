@@ -1,23 +1,19 @@
 \documentclass{beamer}
 \usetheme{Singapore}
 
-% Setup
-\title{My Presentation}
-\subtitle{Subtitle}
-
-\author{
-  Author Name\newline
-  \url{e.mail@address}
+% Slide environment
+% Creates a new frame under its respective subsubsection
+\newenvironment{slide}[1][Slide] {
+  \subsubsection{#1}
+  \begin{frame}
+    \frametitle{#1}
+}
+{
+  \end{frame}
 }
 
-\institute{
-  Human Genetics Informatics \textperiodcentered\ 
-  Wellcome Trust Sanger Institute
-}
-
-\usepackage{datetime}
-\newdate{presDate}{01}{01}{2015}
-\date{\displaydate{presDate}}
+% Front matter setup
+\input{frontMatter.tex}
 
 % Let's do this!
 \begin{document}
