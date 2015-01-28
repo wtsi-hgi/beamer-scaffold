@@ -1,7 +1,7 @@
+# Working directories
 build
+output
+
+# Generated LaTeX files
 slideIndex.tex
 handouts.tex
-
-# This wildcard will have the effect of ignoring any PDF imports you may
-# have in your presentation. This SHOULD be set to your project name.
-*.pdf

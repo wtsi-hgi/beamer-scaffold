@@ -7,7 +7,7 @@ based build system.
   you shouldn't have to mess with this.
 
 * Your presentation's title page set up (title, author, etc.) is defined
-  in `frontMatter.tex`: Edit this appropriately.
+  in `setup/frontMatter.tex`: Edit this appropriately.
   
 * Slides must be `.tex` files within the `slides` directory. They are
   collated automatically by the build system in lexicographical order,
@@ -15,11 +15,11 @@ based build system.
 
 * To build the PDF output, just run `make` in the project root
   directory. The final output, presuming it all worked out, will end up
-  here and be opened with `open`.
+  in the `output` directory and be opened with `open`.
 
 * To build PDF handouts (i.e., the slides in their final state, without
-  transitions), run `make handouts`. The final output will end up here,
-  with `handouts` in the filename.
+  transitions), run `make handouts`. The final output will end up in the
+  `output` directory, with `handouts` appended to the filename.
 
 Note that the PDF will have the same name as the basename of the present
 working directory, affixed with `.pdf`. If you want a different
@@ -29,9 +29,6 @@ For example:
 ```sh
 TARGET=foobar make
 ```
-
-Either way, the wildcard `*.pdf` in `.gitignore` ought to be made
-specific to avoid erroneously ignoring any PDF imports you may have.
 
 `make` will do two compilation passes, as that's usually enough for
 LaTeX, but these are basically hardcoded into the output rule. This
