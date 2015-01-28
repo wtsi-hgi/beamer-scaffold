@@ -8,6 +8,9 @@ based build system.
 
 * Your presentation's title page set up (title, author, etc.) is defined
   in `setup/frontMatter.tex`: Edit this appropriately.
+
+* If you have any addition preamble requirements -- packages, commands,
+  whatever -- they can be defined in `setup/preamble.tex`.
   
 * Slides must be `.tex` files within the `slides` directory. They are
   collated automatically by the build system in lexicographical order,
