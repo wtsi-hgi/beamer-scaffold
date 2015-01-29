@@ -16,6 +16,12 @@ based build system.
   collated automatically by the build system in lexicographical order,
   by filename.
 
+* A BibTeX reference database is defined in `setup/references.bib` and
+  a reference slide (`setup/referencesSlide.tex`) is automatically
+  inserted at the end of the presentation: Tweak these as you see fit.
+  If you don't make any citations, probably best to comment all this out
+  to stop the compilation passes from complaining!
+
 * To build the PDF output, just run `make` in the project root
   directory. The final output, presuming it all worked out, will end up
   in the `output` directory and be opened with `open`.

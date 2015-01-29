@@ -4,27 +4,29 @@
 # Project name is the basename of the present working directory
 TARGET   ?= $(shell basename $$(pwd))
 
-# Main LaTeX entry point and generated files
-MAIN     ?= main.tex
-HANDOUTS  = handouts.tex
-INDEX     = slideIndex.tex
-
-# Setup dependencies and slides
-DEPS      = $(wildcard setup/*.tex)
-SLIDES    = find -s slides -type f -name "*.tex" -maxdepth 1
-
 # Working directories and output file
 BUILDDIR  = build
 OUTDIR    = output
 OUTPUT    = $(OUTDIR)/$(TARGET).pdf
 
+# Main LaTeX entry point and generated files
+MAIN     ?= main.tex
+HANDOUTS  = handouts.tex
+INDEX     = slideIndex.tex
+AUXFILE   = $(BUILDDIR)/$(TARGET).aux
+
+# Setup dependencies and slides
+DEPS      = $(wildcard setup/*.tex) setup/references.bib
+SLIDES    = find -s slides -type f -name "*.tex" -maxdepth 1
+
 # Sed-based preprocessors for slides and handouts, respectively
 PPMAIN    = sed "s/.*/\\\input{&}/"
 PPHAND    = sed "1s/{/[handout]&/"
 
-# PDFLaTeX Setup
+# PDFLaTeX and BibTeX Setup
 CC        = pdflatex
 CFLAGS    = -output-directory=$(BUILDDIR) -jobname=$(TARGET)
+RC        = bibtex
 
 RM        = rm -rf
 
@@ -33,8 +35,10 @@ all: $(OUTPUT)
 	open $^
 
 # PDF output dependant on main, dependencies and slide .tex sources
-# n.b., For more than two passes, replicate the $(CC) line appropriately
+# n.b., Adjust the passes as required
 $(OUTPUT): $(MAIN) $(DEPS) $(INDEX) $(BUILDDIR) $(OUTDIR)
+	$(CC) $(CFLAGS) $(MAIN)
+	$(RC) $(AUXFILE)
 	$(CC) $(CFLAGS) $(MAIN)
 	$(CC) $(CFLAGS) $(MAIN)
 	mv $(BUILDDIR)/$(shell basename $@) $@
