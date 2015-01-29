@@ -24,7 +24,9 @@ based build system.
 
 * To build the PDF output, just run `make` in the project root
   directory. The final output, presuming it all worked out, will end up
-  in the `output` directory and be opened with `open`.
+  in the `output` directory and be opened with `open`. (If `open` is not
+  available on your platform, set the `OPEN` environment variable to
+  `make`.)
 
 * To build PDF handouts (i.e., the slides in their final state, without
   transitions), run `make handouts`. The final output will end up in the

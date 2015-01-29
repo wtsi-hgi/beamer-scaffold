@@ -28,11 +28,12 @@ CC        = pdflatex
 CFLAGS    = -output-directory=$(BUILDDIR) -jobname=$(TARGET)
 RC        = bibtex
 
+OPEN     ?= open
 RM        = rm -rf
 
 # Build PDF output and open it
 all: $(OUTPUT)
-	open $^
+	$(OPEN) $^
 
 # PDF output dependant on main, dependencies and slide .tex sources
 # n.b., Adjust the passes as required
