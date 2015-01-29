@@ -41,9 +41,11 @@ For example:
 TARGET=foobar make
 ```
 
-`make` will do two compilation passes, as that's usually enough for
-LaTeX, but these are basically hardcoded into the output rule. This
-could probably be done a lot better, but this is way is much easier!
+`make` will do several compilation passes: LaTeX, BibTeX, then two more
+LaTeX. This is usually enough to generate the desired output, but should
+you need to alter this, these are basically hardcoded into the output
+rule, so you can change it there. (This could probably be done a lot
+better, but this way is much easier!)
 
 ## `slide` Environment
 
