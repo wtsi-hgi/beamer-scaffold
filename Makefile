@@ -50,7 +50,7 @@ $(INDEX): $(shell $(SLIDES))
 
 # To create handouts, we tweak main.tex and do a recursive make
 handouts: $(HANDOUTS)
-	MAIN=$^ TARGET=$(TARGET).handouts make
+	MAIN=$^ TARGET=$(TARGET).handouts OPEN=$(OPEN) make
 
 # Preprocess main.tex to add the 'handout' option to the document class
 $(HANDOUTS): $(MAIN)
